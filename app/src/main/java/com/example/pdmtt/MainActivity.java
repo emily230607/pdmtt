@@ -1,8 +1,11 @@
 package com.example.pdmtt;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,5 +23,23 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.wtf("ciclo de vida", "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.wtf("ciclo de vida", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.wtf("ciclo de vida", "onResume");
     }
 }
