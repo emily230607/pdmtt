@@ -3,6 +3,7 @@ package com.example.pdmtt;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,15 +14,26 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     Button button;
+    EditText edPeso, edAltura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        button = findViewById(R.id.button4);
+        edPeso = findViewById(R.id.edPeso);
+        edAltura = findViewById(R.id.edAltura);
         button.setOnClickListener(v ->{
-            Intent intent = new Intent(this, imcResultado.class);
-        startActivity(intent);
+
+            Intent i = new Intent(MainActivity.this, imcResultado.class);
+            Bundle bundle = new Bundle();
+            Double peso = Double.parseDouble((edPeso.getText().toString()) );
+            Double altura = Double.parseDouble((edAltura.getText().toString() ));
+            bundle.putDouble("peso", peso);
+            bundle.putDouble("altura", altura);
+            i.putExtras(bundle);
+        startActivity(i);
 
         } );
 
