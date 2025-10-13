@@ -20,52 +20,23 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> nomes;
-
     ListView listView;
 
-    Button button;
 
-    EditText editText;
+
+PlanetaController  planetaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
+        planetaController = new PlanetaController();
         listView = findViewById(R.id.listview);
-        button = findViewById(R.id.salvar);
-        editText = findViewById(R.id.editarNome);
-        nomes = new ArrayList<String>();
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        ArrayAdapter<String> adapter= new ArrayAdapter<>(getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                nomes);
-
-
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,planetaController.getNomePlaneta());
         listView.setAdapter(adapter);
-        button.setOnClickListener(v -> {
-            nomes.add(editText.getText().toString());
-            adapter.notifyDataSetChanged();
-            //adicionar elemento a listagem
-            /**Toast.makeText(getApplicationContext(),nomes[position], Toast.LENGTH_LONG).show();
-             **/
-        });
 
-        listView.setOnItemClickListener((parent, view, position, id) ->{
-            //Excluir elementos ou listagem
-            /** Toast.makeText(this,(position)+nomes[position], Toast.LENGTH_SHORT).show();
-             **/
-        });
 
     }
 }
