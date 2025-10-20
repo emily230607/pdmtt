@@ -34,7 +34,9 @@ PlanetaController  planetaController;
         planetaController = new PlanetaController();
         listView = findViewById(R.id.listview);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,planetaController.getNomePlaneta());
+        PlanetaAdapter adapter = new PlanetaAdapter(this,
+                R.layout.item_lista,
+                planetaController.getPlaneta());
         listView.setAdapter(adapter);
 
 
