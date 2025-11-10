@@ -1,8 +1,13 @@
 package com.example.pdmtt;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +15,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase db;
 
+    Button button;
+    EditText editText;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        button = findViewById((R.id.button));
+        editText = findViewById(R.id.editTextText);
+        listView = findViewById(R.id.listView);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -27,12 +40,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         db = openOrCreateDatabase("app_database", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT," + "TITULO varchar, texto TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS notas" + "(id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, txt TEXT);");
+
+        carregarListagem();
+
+        button.setOnClickListener(v -> {
+            String titulo = editText.getText().toString();
+
 
         ContentValues values = new ContentValues();
-        values.put("chega Natal hohoho", "Minha primeira nota");
-        values.put("Texto", "esse é o texyo suohrg");
+        values.put("titulo", "Minha primeira nota");
+        values.put("txt", titulo);
         db.insert("notas", null, values);
+        carregarListagem();
+        });
+    }
+
+    public void carregarListagem() {
+        ArrayList<String> titulos = new ArrayList<String>();
+        Cursor cursor = db.rawQuery("SELECT * FROM notas", null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()){
+            String titulo = cursor.getString(cursor.getColumnIndex("titulo"));
+            titulos.add(titulo);
+            cursor.moveToNext();
+        }
+
+        ArrayAdapter<String>tituloAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, titulos);
+
+        listView.setAdapter(tituloAdapter);
 
     }
+
+
 }
