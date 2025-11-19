@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview_apps);
         packageManager = getPackageManager();
 
-        // Recupera somente apps lançáveis
+
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         appList = packageManager.queryIntentActivities(intent, 0)
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(appAdapter);
 
-        // Função de clique: abrir o app
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             ApplicationInfo appInfo = appList.get(position);
             String packageName = appInfo.packageName;
