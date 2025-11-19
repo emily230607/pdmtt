@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         edpeso=findViewById(R.id.edPeso);
 
         b.setOnClickListener(v -> {
-            Intent intent=new Intent(this, com.example.app.IMCResultado.class);
+            Intent intent=new Intent(this, com.example.pdmtt.IMCResultado.class);
             //passar os dados para o bundle
             float peso= Float.parseFloat(edpeso.getText().toString());
             float altura= Float.parseFloat(edaltura.getText().toString());

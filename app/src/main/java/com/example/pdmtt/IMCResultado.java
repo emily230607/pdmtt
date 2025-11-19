@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.pdmtt.R;
+
 public class IMCResultado extends AppCompatActivity {
 
     TextView tvPeso,tvAltura,tvImc;
@@ -18,7 +20,7 @@ public class IMCResultado extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imcresultado);
+        setContentView(R.layout.activity_imc_resultado);
         tvPeso=findViewById(R.id.tvPeso);
         tvAltura=findViewById(R.id.tvAltura);
         tvImc=findViewById(R.id.tvImc);
