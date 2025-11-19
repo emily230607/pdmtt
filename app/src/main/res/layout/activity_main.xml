@@ -10,51 +10,42 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="113dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Calculadora IMC" />
-
-    <TextView
-        android:id="@+id/tvPeso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Peso (kg)" />
+        android:layout_weight="1"
+        android:text="Calculadora IMC"
+        android:textAlignment="center"
+        android:textSize="34sp" />
 
     <EditText
         android:id="@+id/edPeso"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
-        android:layout_weight="0.1"
-        android:ems="10"
-        android:hint="x (kg)"
-        android:inputType="numberDecimal" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Altura(m)" />
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Peso"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edAltura"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="y (m)"
+        android:hint="Altura"
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:text="Calcular" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Calcular IMC" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="416dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/perfil" />
 </LinearLayout>

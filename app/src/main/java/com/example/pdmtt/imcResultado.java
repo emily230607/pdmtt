@@ -1,37 +1,48 @@
 package com.example.pdmtt;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-public class imcResultado extends AppCompatActivity {
+public class IMCResultado extends AppCompatActivity {
 
-    TextView tvResultado;
+    TextView tvPeso,tvAltura,tvImc;
     ImageView imageView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_imc_resultado);
-        tvResultado = findViewById(R.id.tvResultado);
-        imageView = findViewById(R.id.imageViewPerfil);
+        setContentView(R.layout.activity_imcresultado);
+        tvPeso=findViewById(R.id.tvPeso);
+        tvAltura=findViewById(R.id.tvAltura);
+        tvImc=findViewById(R.id.tvImc);
 
-        Intent i = getIntent();
-        Bundle b = i.getExtras();
-        Double peso = b.getDouble("peso");
-        Double altura = b.getDouble("altura");
+        imageView=findViewById(R.id.imgPerfil);
 
-        Double imc = peso/(altura*altura);
+        Bundle b=getIntent().getExtras();
 
-        tvResultado.setText(Double.toString(imc));
-        imageView.setImageResource(R.drawable.perfil);
+        float peso=b.getFloat("peso");
+        float altura=b.getFloat("altura");
 
+        float imc=(peso)/(altura*altura);
+
+        tvPeso.setText(Float.toString(peso));
+        tvAltura.setText(Float.toString(altura));
+        tvImc.setText(Float.toString(imc));
+
+
+        if (imc<18.5){
+            imageView.setImageResource(R.drawable.abaixopeso);
+        }
+        if(imc>18.5 && imc<100){
+            imageView.setImageResource(R.drawable.normal);
+        }
 
 
     }
