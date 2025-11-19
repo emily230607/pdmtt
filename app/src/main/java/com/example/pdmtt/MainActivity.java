@@ -1,44 +1,63 @@
 package com.example.pdmtt;
 
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.renderscript.Script;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
-
-
-
-PlanetaController  planetaController;
+    PackageManager packageManager;
+    List<ApplicationInfo> appList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        planetaController = new PlanetaController();
-        listView = findViewById(R.id.listview);
 
-        PlanetaAdapter adapter = new PlanetaAdapter(this,
+        listView = findViewById(R.id.listview_apps);
+        packageManager = getPackageManager();
+
+        // Recupera somente apps lançáveis
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        appList = packageManager.queryIntentActivities(intent, 0)
+                .stream()
+                .map(resolveInfo -> resolveInfo.activityInfo.applicationInfo)
+                .toList();
+
+        // Define o adaptador personalizado
+        AppAdapter appAdapter = new AppAdapter(
+                this,
                 R.layout.item_lista,
-                planetaController.getPlaneta());
-        listView.setAdapter(adapter);
+                appList
+        );
 
+        listView.setAdapter(appAdapter);
 
+        // Função de clique: abrir o app
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            ApplicationInfo appInfo = appList.get(position);
+            String packageName = appInfo.packageName;
+
+            Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
+
+            if (launchIntent != null) {
+                startActivity(launchIntent);
+            } else {
+                Toast.makeText(MainActivity.this,
+                        "Não foi possível abrir o aplicativo",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
