@@ -1,25 +1,22 @@
 package com.example.pdmtt;
-
 import java.util.ArrayList;
 
 public class PlanetaController {
+    PlanetaDao planetaDao;
 
-    PlanetaDAO planetaDAO;
-
-    public PlanetaController() {
-        planetaDAO = new PlanetaDAO();
+    public PlanetaController(){
+        planetaDao = new PlanetaDao();
     }
 
-    public void addPlaneta(Planeta planeta) {
+    public void addPlaneta(Planeta planeta) {//verficaria a lofica de negocio aqui
     }
-
     public ArrayList<Planeta> getPlaneta() {
-        return planetaDAO.getPlanetas();
+        //verica se algo se algo ....
+        return planetaDao.getPlanetas();
     }
-
-    public ArrayList<String> getNomePlaneta() {
+    public ArrayList<String>  getNomePLanetas(){
         ArrayList<String> nomes = new ArrayList<String>();
-        for (Planeta planeta : planetaDAO.getPlanetas()) {
+        for (Planeta planeta : planetaDao.getPlanetas()) {
             nomes.add(planeta.nome);
         }
         return nomes;

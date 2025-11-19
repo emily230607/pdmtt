@@ -1,26 +1,25 @@
 package com.example.pdmtt;
 
+
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 
-public class PlanetaDAO {
-
+public class PlanetaDao {
     ArrayList<Planeta> arrayListPlanetas;
-    public PlanetaDAO(){
-
-    arrayListPlanetas= new ArrayList<Planeta>();
-
+    public PlanetaDao (){
+        arrayListPlanetas =new  ArrayList<Planeta>();
         arrayListPlanetas.add(new Planeta("Mercúrio",R.drawable.mercury));
         arrayListPlanetas.add(new Planeta("Vênus",R.drawable.venus));
         arrayListPlanetas.add(new Planeta("Terra",R.drawable.earth));
         arrayListPlanetas.add(new Planeta("Marte",R.drawable.mars));
-        arrayListPlanetas.add(new Planeta( "Júpter",R.drawable.jupter));
+        arrayListPlanetas.add(new Planeta("Júpiter",R.drawable.jupter));
         arrayListPlanetas.add(new Planeta("Saturno",R.drawable.saturn));
-        arrayListPlanetas.add(new Planeta( "Urano",R.drawable.uranus));
-        arrayListPlanetas.add(new Planeta( "Netuno",R.drawable.neptune));
-    }
+        arrayListPlanetas.add(new Planeta("Urano",R.drawable.uranus));
+        arrayListPlanetas.add(new Planeta("Netuno",R.drawable.neptune));
 
+    }
     public ArrayList<Planeta> getPlanetas(){
         return arrayListPlanetas;
     }
-
 }

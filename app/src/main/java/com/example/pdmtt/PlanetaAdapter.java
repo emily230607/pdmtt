@@ -1,6 +1,6 @@
 package com.example.pdmtt;
-
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +14,20 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 public class PlanetaAdapter extends ArrayAdapter<Planeta> {
-
-    int mResource;
-    public PlanetaAdapter(@NonNull Context context, int resource, @NonNull List<Planeta> objects) {
+    int mResouce;
+    public PlanetaAdapter( Context context, int resource,  List<Planeta> objects) {
         super(context, resource, objects);
-        mResource=resource;
+        mResouce=resource;
     }
-
-
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View v= inflater.inflate(mResource, parent, false);
-
-        Planeta planeta = getItem(position);
-        TextView tv= v.findViewById((R.id.textView));
-        ImageView iv = v.findViewById(R.id.imageView);
+        View v=inflater.inflate(mResouce, parent, false);
+        Planeta planeta=getItem(position);
+        TextView tv=v.findViewById(R.id.textView);
+        ImageView iv=v.findViewById(R.id.imageView);
         tv.setText(planeta.nome);
         iv.setImageResource(planeta.foto);
         return v;
