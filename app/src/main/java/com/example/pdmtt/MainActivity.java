@@ -42,4 +42,23 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Log.wtf("ciclo de vida", "onResume");
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("ciclo_vida","onRestart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("ciclo_vida","onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ciclo_vida","onDestroy");
+    }
+
 }
