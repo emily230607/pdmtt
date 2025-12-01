@@ -17,43 +17,41 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
-
     SQLiteDatabase db;
-
     Button button;
     EditText editText;
     ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        button = findViewById((R.id.button));
+        button = findViewById(R.id.buttonSalvar);
         editText = findViewById(R.id.editTextText);
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.listview);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        db = openOrCreateDatabase("app_database", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS notas" + "(id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, txt TEXT);");
+        db = openOrCreateDatabase("meu_banco.db", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS notas" +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, txt TEXT);");
 
         carregarListagem();
 
         button.setOnClickListener(v -> {
             String titulo = editText.getText().toString();
-
-
-        ContentValues values = new ContentValues();
-        values.put("titulo", "Minha primeira nota");
-        values.put("txt", titulo);
-        db.insert("notas", null, values);
-        carregarListagem();
+            ContentValues cv = new ContentValues();
+            cv.put("titulo", titulo);
+            db.insert("notas",null, cv);
+            carregarListagem();
         });
+
+
     }
 
     public void carregarListagem() {
@@ -61,17 +59,19 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("SELECT * FROM notas", null);
         cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()){
+        while(!cursor.isAfterLast()) {
             String titulo = cursor.getString(cursor.getColumnIndex("titulo"));
             titulos.add(titulo);
             cursor.moveToNext();
         }
 
-        ArrayAdapter<String>tituloAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, titulos);
+        ArrayAdapter<String> titulosAdapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                titulos
+        );
 
-        listView.setAdapter(tituloAdapter);
-
+        listView.setAdapter(titulosAdapter);
     }
-
 
 }
