@@ -1,11 +1,9 @@
 package com.example.pdmtt;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,31 +14,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        Log.d("ciclo_vida","Oncreate");
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.wtf("ciclo de vida", "onStart");
+        Log.d("ciclo_vida","onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.wtf("ciclo de vida", "onResume");
+        Log.d("ciclo_vida","OnResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.wtf("ciclo de vida", "onResume");
+        Log.d("ciclo_vida","onPause");
     }
 
     @Override
@@ -60,5 +54,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d("ciclo_vida","onDestroy");
     }
-
 }
