@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Pdmtt"
         tools:targetApi="31">
         <activity
-            android:name=".imcResultado"
+            android:name=".IMCResultado"
             android:exported="true">
 
         </activity>
