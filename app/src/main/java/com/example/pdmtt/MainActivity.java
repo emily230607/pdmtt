@@ -20,15 +20,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     TextView textView;
 
+    ListView listView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        listView = findViewById(R.id.listView);
         textView= findViewById(R.id.textViewSensor);
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
         sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        List<Sensor> sensorList = sm.getSensorList(Sensor.TYPE_ALL); //lista de sensores
+        ArrayList<String> listNameSensor = new ArrayList<>();
+            for (Sensor s: sensorList){
+                listNameSensor.add(s.getName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listNameSensor);
+        listView.setAdapter(adapter);
     }
 
     public void onSensorChanged(SensorEvent event) {
